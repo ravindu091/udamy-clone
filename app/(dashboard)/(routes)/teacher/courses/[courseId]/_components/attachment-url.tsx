@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+
 import {
     Form,
     FormControl,
@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { File, Loader2, Pencil, X } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Attachment, Course } from "@prisma/client";
+import {useRouter} from 'next/navigation'
 
 interface AttachmentUrlFormProps {
     initialData: Course & { attachments: Attachment[] };

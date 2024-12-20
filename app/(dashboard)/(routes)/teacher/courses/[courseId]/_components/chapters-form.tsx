@@ -24,7 +24,7 @@ import {  PlusCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Chapter, Course } from "@prisma/client";
 import { Input } from "@/components/ui/input";
-
+import {Reorder} from 'motion/react'
 
 
 interface ChaptersForm {
@@ -41,6 +41,7 @@ const ChaptersForm = ({initialData , courseId}:ChaptersForm)=> {
     const [isCreating , setIsCreating] = useState(false);
     //is editing
     const [isUpdating ,setIsUpdating] = useState(false);
+    const [chapterList,setChapterList] = useState(initialData.chapters)
 
     const toggleCreating = ()=>setIsCreating((current)=> !current);
 
@@ -115,6 +116,16 @@ const ChaptersForm = ({initialData , courseId}:ChaptersForm)=> {
                 <p className="  text-xs text-muted-foreground mt-4">
                     Drag and drop to reoder to chapters
                 </p>
+            )
+        }{
+            !isCreating && (
+                <Reorder.Group as="div" values={chapterList} onReorder={setChapterList} >
+                    {chapterList.map(item => (
+                        <Reorder.Item key={item.id} value={item.position}>
+                            {item.title}
+                        </Reorder.Item>
+                     ))}.
+                </Reorder.Group>
             )
         }
     </div>
